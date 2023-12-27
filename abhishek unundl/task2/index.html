@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Chocolate Pack</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #a77676;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #31ee4a;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .chocolate-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .chocolate-item label {
+        margin-right: 10px;
+      }
+
+      #totalPrice {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Build Your Custom Chocolate Pack</h2>
+
+      <div class="chocolate-item">
+        <img src="images.jpeg" alt="">
+        <label for="darkChocolate">Dark Chocolate:</label>
+        <input type="number" id="darkChocolate" min="0" max="8" value="0" />
+      </div>
+
+      <div class="chocolate-item">
+        <img src="download.jpeg" alt="">
+        <label for="milkChocolate">Milk Chocolate:</label>
+        <input type="number" id="milkChocolate" min="0" max="8" value="0" />
+      </div>
+
+      <div class="chocolate-item">
+        <img src="download (1).jpeg" alt="">
+        <label for="whiteChocolate">White Chocolate:</label>
+        <input type="number" id="whiteChocolate" min="0" max="8" value="0" />
+      </div>
+
+      <div id="totalPrice">Total Price: $0.00</div>
+    </div>
+
+    <script>
+      const darkChocolateInput = document.getElementById('darkChocolate')
+      const milkChocolateInput = document.getElementById('milkChocolate')
+      const whiteChocolateInput = document.getElementById('whiteChocolate')
+      const totalPriceElement = document.getElementById('totalPrice')
+
+      darkChocolateInput.addEventListener('input', updateTotalPrice)
+      milkChocolateInput.addEventListener('input', updateTotalPrice)
+      whiteChocolateInput.addEventListener('input', updateTotalPrice)
+
+      function updateTotalPrice() {
+        const darkChocolateQty = parseInt(darkChocolateInput.value) || 0
+        const milkChocolateQty = parseInt(milkChocolateInput.value) || 0
+        const whiteChocolateQty = parseInt(whiteChocolateInput.value) || 0
+
+        const totalPrice =
+          (darkChocolateQty + milkChocolateQty + whiteChocolateQty) * 2.5
+        totalPriceElement.textContent = `Total Price: $${totalPrice.toFixed(2)}`
+
+        if (darkChocolateQty + milkChocolateQty + whiteChocolateQty > 8) {
+          alert(
+            'Total quantity cannot exceed 8 items. Please adjust your selection.'
+          )
+          this.value = 0
+          updateTotalPrice()
+        }
+      }
+    </script>
+  </body>
+</html>
